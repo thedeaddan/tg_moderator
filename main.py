@@ -114,6 +114,7 @@ def clear_warns(message):
 	cur = conn.cursor()
 	cur.execute("DELETE FROM users WHERE userid = ?",(message.reply_to_message.from_user.id,))
 	conn.commit()
+	bot.unban_chat_member(chat_id,message.reply_to_message.from_user.id, True)
 	if not message.reply_to_message.from_user.username:
 		send_message(f"Очищены все предупреждение пользователя {message.reply_to_message.from_user.first_name}.")
 	else:
